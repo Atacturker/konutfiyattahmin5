@@ -3,6 +3,26 @@ import pandas as pd
 import joblib
 import os
 from utils import load_data, transform_new_data
+import os
+import gdown
+import pickle
+
+# İndirme bağlantısı ve hedef dosya adı
+url = "https://drive.google.com/uc?id=1DAbncW8rIQ9-92XUdsPvV6LmYEbFxcuq"
+output_path = "trained_models.pkl"
+
+# Eğer dosya yoksa Drive'dan indir
+if not os.path.exists(output_path):
+    gdown.download(url, output_path, quiet=False)
+    print("Model indirildi.")
+else:
+    print("Model zaten var, indirilmiyor.")
+
+# Dosyayı yükle
+with open(output_path, "rb") as f:
+    model = pickle.load(f)
+
+# Artık 'model' değişkenin içinde trained modelin var
 
 def main():
     st.title("Konut Fiyat Tahmin Uygulaması")
